@@ -101,12 +101,12 @@ class Profile extends Component {
            this.state.post && this.state.email &&
            this.state.address && this.state.detailAddress)
         {
-            if(this.state.checkPassword != this.state.password)
+            if(this.state.checkPassword !== this.state.password)
             {
                 window.alert("패스워드와 패스워드확인이 같지 않습니다.");
                 return;
             }
-            if(this.state.checkAccount == 0)
+            if(this.state.checkAccount === 0)
             {
                 window.alert("중복확인을 해주세요");
             }
@@ -161,15 +161,15 @@ class Profile extends Component {
         {
             return <Redirect to="/"/>
         }
-        if(this.state.checkAccount == 1)
+        if(this.state.checkAccount === 1)
         {
             this.accountText = "가능한 아이디입니다."
         }
-        else if(this.state.checkAccount == 0)
+        else if(this.state.checkAccount === 0)
         {
             this.accountText = "이미 존재하는 아이디입니다.";
         }
-        else if(this.state.checkAccount == -1)
+        else if(this.state.checkAccount === -1)
         {
             this.accountText = "(6~10자의 영문 및 숫자 가능하며 여백은 사용할 수 없습니다)";
         }

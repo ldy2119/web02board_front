@@ -1,7 +1,9 @@
 import ProfileStore from "./ProfileStore";
+import CatetoryStore from "./CategoryStore"
 
 export default {
-    ProfileStore
+    ProfileStore,
+    CatetoryStore
 }
 
 // const Stores = {

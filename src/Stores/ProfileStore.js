@@ -73,8 +73,8 @@ class ProfileStore {
             }
             else
             {
-                return 0;
                 alert("전송 실패");
+                return 0;
             }
         }
         catch (e)
@@ -117,8 +117,8 @@ class ProfileStore {
             }
             else
             {
-                return 0;
                 alert("전송 실패");
+                return 0;
             }
         }
         catch (e)
