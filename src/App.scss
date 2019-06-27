@@ -1,9 +1,6 @@
 .app-header
 {
   background-color: cadetblue;
-  position:fixed;
-  left:0;
-  right:0;
   color: #FFFFFF;
   .menu-bar
   {
@@ -27,22 +24,7 @@
     }
   }
 }
-
-.app-body
-{
-  position:absolute;
-  top:150px;
-}
-
 .listStyle
 {
   border-bottom: 1px solid black;
-}
-
-.footer
-{
-  position : absolute;
-  bottom: 0;
-  width : 100%;
-  text-align : center
 }

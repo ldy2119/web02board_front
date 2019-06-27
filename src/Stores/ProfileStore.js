@@ -30,11 +30,11 @@ class ProfileStore {
                 timeout: 3000,
                 data: JSON.stringify(u)
             });
-            console.log(response);
+            // console.log(response);
             if(response.status === 200)
             {
                 this.user = response.data;
-                console.log(this.user);
+                // console.log(this.user);
             }
             else
             {
@@ -55,7 +55,7 @@ class ProfileStore {
     @action EditProfile = async(user) => {
         try
         {
-            console.log(user);
+            // console.log(user);
             let response = await axios({
                 url : "http://localhost:8080/api/modifyUser",
                 method: 'put',
@@ -65,10 +65,10 @@ class ProfileStore {
                 timeout: 3000,
                 data: JSON.stringify(user)
             });
-            console.log(response);
+            // console.log(response);
             if(response.status === 200)
             {
-                console.log(response.data);
+                // console.log(response.data);
                 return response.data;
             }
             else
@@ -98,7 +98,7 @@ class ProfileStore {
                 email : user.email,
                 mileage : 0
             };
-            console.log(request);
+            // console.log(request);
 
             let response = await axios({
                 url : "http://localhost:8080/api/user/add",
@@ -109,10 +109,10 @@ class ProfileStore {
                 timeout: 3000,
                 data: JSON.stringify(request)
             });
-            console.log(response);
+            // console.log(response);
             if(response.status === 200)
             {
-                console.log(response.data);
+                // console.log(response.data);
                 return response.data;
             }
             else
@@ -138,10 +138,10 @@ class ProfileStore {
                 },
                 timeout: 3000
             });
-            console.log(response);
+            // console.log(response);
             if(response.status === 200)
             {
-                console.log(response.data);
+                // console.log(response.data);
                 return response.data;
             }
             else
@@ -154,6 +154,137 @@ class ProfileStore {
             console.log(e);
             alert(e.toLocaleString());
             return false;
+        }
+    }
+
+    @action addCart = async (id, count) => {
+        try
+        {
+            let data = {
+                userId : this.user.id,
+                productId : id,
+                productCount : count
+            }
+            console.log(JSON.stringify(data));
+            let response = await axios({
+                url : "http://localhost:8080/api/cart/add",
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                },
+                timeout: 3000,
+                data: JSON.stringify(data)
+            });
+            console.log(response);
+            if(response.status === 200)
+            {
+                return response.data;
+            }
+            else
+            {
+                alert("전송 실패");
+                return null;
+            }
+        }
+        catch (e)
+        {
+            alert(e.toLocaleString());
+            return null;
+        }
+    }
+
+    @action modifyCart = async (cartId, productId, count) => {
+        try
+        {
+            let data = {
+                id : cartId,
+                userId : this.user.id,
+                productId : productId,
+                productCount : count
+            }
+            let response = await axios({
+                url : "http://localhost:8080/api/cart/modify",
+                method: 'put',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                },
+                timeout: 3000,
+                data: JSON.stringify(data)
+            });
+            console.log(response);
+            if(response.status === 200)
+            {
+                return response.data;
+            }
+            else
+            {
+                alert("전송 실패");
+                return null;
+            }
+        }
+        catch (e)
+        {
+            alert(e.toLocaleString());
+            return null;
+        }
+    }
+
+    @action deleteCart = async (cartId) => {
+        try
+        {
+            let response = await axios({
+                url : "http://localhost:8080/api/cart/delete/" + cartId,
+                method: 'delete',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                },
+                timeout: 3000
+            });
+            console.log(response);
+            if(response.status === 200)
+            {
+                return response.data;
+            }
+            else
+            {
+                alert("전송 실패");
+                return null;
+            }
+        }
+        catch (e)
+        {
+            alert(e.toLocaleString());
+            return null;
+        }
+    }
+
+    @action getCart = async () => {
+        try
+        {
+            let response = await axios({
+                url : "http://localhost:8080/api/cart/findByUser/" + this.user.id,
+                method: 'get',
+                headers: {
+                    "Content-type" : "application/json; charset=UTF-8"
+                },
+                timeout: 3000
+            });
+            // console.log(response);
+            if(response.status === 200)
+            {
+                // console.log(response.data);
+                return response.data;
+            }
+            else
+            {
+                alert("전송 실패");
+                return null;
+            }
+        }
+        catch (e) {
+            console.log(e);
+            alert(e.toLocaleString());
+            return null;
         }
     }
 }

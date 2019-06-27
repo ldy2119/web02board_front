@@ -14,6 +14,14 @@ class Profile extends Component {
 
     u = this.props.stores.ProfileStore;
 
+    async componentDidMount() {
+        this.setState({
+            account : "zzzz",
+            password : "zzzzzz"
+        });
+        await this.AutoLogin();
+    }
+
     updateAccount = (event) => {
         this.setState({
             ...this.state,
@@ -27,6 +35,13 @@ class Profile extends Component {
             password : event.target.value
         });
     };
+
+    AutoLogin = async () => {
+        await this.u.Login({
+            account : "zzzz",
+            password : "zzzzzz"
+        });
+    }
 
     Login = async () =>
     {

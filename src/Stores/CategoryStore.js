@@ -70,10 +70,10 @@ class CategoryStore {
         }
     }
 
-    @action getCurrentProducts = async () => {
+    @action getCurrentProducts = async (id) => {
         try {
             let response = await axios({
-                url : "http://localhost:8080/api/product/findByCurrentDate",
+                url : "http://localhost:8080/api/product/findByCurrentDate/" + id,
                 method: 'get',
                 headers: {
                     "Content-type" : "application/json; charset=UTF-8"
@@ -83,7 +83,7 @@ class CategoryStore {
             // console.log(response);
             if(response.status === 200)
             {
-                console.log(response.data);
+                // console.log(response.data);
                 return response.data;
             }
             else
