@@ -22,7 +22,7 @@ class ProductInfo extends Component {
                 img : this.props.product.imagePath,
                 name : this.props.product.productName,
                 cost : this.props.product.cost
-            })
+            });
         }
     }
 
@@ -31,7 +31,7 @@ class ProductInfo extends Component {
         return(
             <div>
                 <div>
-                    <img src={this.state.img} width="50px" height="50px"></img>
+                    <img src={`/img/${this.state.img}`} width="50px" height="50px"/>
                 </div>
                 <div>
                     {this.state.name}

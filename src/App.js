@@ -13,6 +13,8 @@ import CategoryList from "./Category/Category";
 import Category from "./Category/index";
 import Product from "./Product/index";
 import Cart from "./Cart/index";
+import Search from "./Search/index";
+import SearchInput from "./Home/SearchInput";
 
 const App = ()=>(
     <Provider stores={Stores}>
@@ -28,7 +30,7 @@ const App = ()=>(
                         00 0000 0000 쇼핑몰
                     </div>
                     <div style={{float : "right"}}>
-                        <input/> <button>GO</button>
+                        <SearchInput/>
                     </div>
                 </div>
                 <div>
@@ -42,6 +44,7 @@ const App = ()=>(
                 <Route path = "/category/:command?/:id?" exact component={Category}/>
                 <Route path = "/product/:id?" exact component={Product}/>
                 <Route path = "/cart/:command?/:id?/:count?" exact component={Cart}/>
+                <Route path = "/search/:search" exact component={Search}/>
                 <footer className="footer">
 
                     <div>
@@ -62,16 +65,5 @@ const App = ()=>(
         </BrowserRouter>
     </Provider>
 )
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <Home/>
-//       <Page1/>
-//       <Page2/>
-//       <Page3/>
-//     </div>
-//   );
-// }
 
 export default App;
