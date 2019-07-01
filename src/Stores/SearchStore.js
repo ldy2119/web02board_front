@@ -20,7 +20,7 @@ class SearchStore {
     @action getSearch = async(search) => {
         try
         {
-            // console.log(user);
+            console.log(search);
             let response = await axios({
                 url : "http://localhost:8080/api/product/findByContainName/" + search,
                 method: 'get',
@@ -32,7 +32,7 @@ class SearchStore {
             console.log(response);
             if(response.status === 200)
             {
-                console.log(response.data);
+                // console.log(response.data);
                 return response.data;
             }
             else

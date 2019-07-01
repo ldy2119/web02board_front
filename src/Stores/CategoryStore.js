@@ -93,7 +93,7 @@ class CategoryStore {
             }
         }
         catch (e) {
-
+            return null;
         }
     }
 
@@ -122,6 +122,33 @@ class CategoryStore {
         }
         catch (e) {
 
+        }
+    }
+
+    @action getSubCategory = async (id) => {
+        try {
+            let response = await axios({
+                url : "http://localhost:8080/api/subCategory/findByCategoryId/" + id,
+                method: 'get',
+                headers: {
+                    "Content-type" : "application/json; charset=UTF-8"
+                },
+                timeout: 3000
+            });
+            // console.log(response);
+            if(response.status === 200)
+            {
+                // console.log(response.data);
+                return response.data;
+            }
+            else
+            {
+                alert("전송 실패");
+                return null;
+            }
+        }
+        catch (e) {
+            return null;
         }
     }
 }

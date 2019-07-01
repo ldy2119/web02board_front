@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {inject, observer} from "mobx-react";
-import {Link} from "react-router-dom";
+import ProductInfo from "../Category/ProductInfo";
 
 @inject("stores")
 @observer
@@ -25,9 +25,19 @@ class Product extends Component {
     }
 
     async componentDidMount() {
-        if(this.props.match && this.props.match.params.command === "search" && this.props.match.params.search)
+        if(this.props.match && this.props.match.params.search)
         {
             await this.updateProduct(this.props.match.params.search);
+        }
+    }
+
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.match && this.props.match.params.search)
+        {
+            if(this.props.match.params.search !== prevProps.match.params.search)
+            {
+                await this.updateProduct(this.props.match.params.search);
+            }
         }
     }
 
@@ -43,11 +53,7 @@ class Product extends Component {
                     <ul>
                         {this.state.product.map((p) => {
                             return (
-                                <Link to={`/product/${p.id}`}>
-                                    <li>
-
-                                    </li>
-                                </Link>
+                                <ProductInfo product = {p}/>
                             )
                         })}
                     </ul>

@@ -18,7 +18,8 @@ class Profile extends Component {
         address : "",
         detailAddress : "",
         goToMain : false,
-        checkAccount : -1
+        checkAccount : -1,
+        agree : false
     }
 
     u = this.props.stores.ProfileStore;
@@ -106,9 +107,15 @@ class Profile extends Component {
                 window.alert("패스워드와 패스워드확인이 같지 않습니다.");
                 return;
             }
-            if(this.state.checkAccount === 0)
+            if(this.state.checkAccount === -1)
             {
                 window.alert("중복확인을 해주세요");
+                return;
+            }
+            if(!this.state.agree)
+            {
+                window.alert("회원약관에 동의해주세요.");
+                return;
             }
             if(await this.u.Register(this.state) > 0)
             {
@@ -153,6 +160,13 @@ class Profile extends Component {
         }
     }
 
+    agreeRules = (e) => {
+        this.setState({
+            ...this.state,
+            agree : e.target.checked
+        });
+    };
+
     accountText = "(6~10자의 영문 및 숫자 가능하며 여백은 사용할 수 없습니다)";
 
     render()
@@ -187,7 +201,10 @@ class Profile extends Component {
                 이메일 : <input value={this.state.email} onChange={this.updateEmail}/><br/>
                 회원약관<br/>
                 <div></div>
-                회원약관에<br/>
+                회원약관에
+                <div className="cell">
+                    <input type="checkbox" onClick={this.agreeRules} value="동의"/>동의
+                </div><br/>
                 <button onClick={this.Register}>확인</button>
                 <button><Link to="/">취소</Link></button>
             </div>

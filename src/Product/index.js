@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {inject, observer} from "mobx-react";
 import {Link} from "react-router-dom";
+import Comment from "../Comment/index";
+// import AddComment from "../Comment/AddComment";
 
 @inject("stores")
 @observer
@@ -8,7 +10,7 @@ class Product extends Component {
 
     state = {
         product : null,
-        buyNumber : 0
+        buyNumber : 1
     }
 
     date = new Date().toDateString();
@@ -20,6 +22,11 @@ class Product extends Component {
     cartUrl = "";
 
     updateBuyNumber = (e) => {
+        if(e.target.value <= 0)
+        {
+            window.alert("1개 이상의 상품을 주문해주세요");
+            return;
+        }
         this.setState({
             ...this.state,
             buyNumber : e.target.value
@@ -49,7 +56,7 @@ class Product extends Component {
                         <div>
                             {this.state.product.productName}
                         </div>
-                        <img src={this.state.product.imagePath} width="200px" height="200px" alt=""/><br/>
+                        <img src={`http://localhost:8080/attachment/${this.state.product.imagePath}`} width="200px" height="200px" alt=""/><br/>
                         제조사 : {this.state.product.companyName}<br/>
                         마일리지 : {this.state.product.mileage}<br/>
                         {this.u.user ? (<span>주문수량 : <input type="number" value={this.state.buyNumber} onChange={this.updateBuyNumber}/> <button><Link to={`/cart/add/${this.product.id}/${this.state.buyNumber}`}>장바구니에 담기</Link></button><br/></span>) : (<span></span>)}
@@ -75,18 +82,9 @@ class Product extends Component {
                             직통전화번호:080-0000-0000 이나 MD전용게시판을 이용해주세요<br/>
                         </div>
                     </div>
-                    {this.u.user ? (<div>
-                        <div>
-                            고객의 상품 평
-                        </div>
-                        <div>
-                            ※고객의 상품평은 추후 쇼핑몰의 제품선정에 중요한 역할을 합니다.<br/>
-                            ※쇼핑몰의 더 나은 상품선정과 고객 분들의 쇼핑문화의 질을 높이고자 좋은 평은<br/>
-                            매월 심사 후 쇼핑몰 메인에 올려드리고 선물을 증정하고 있습니다.<br/>
-                            제목 : <input/><button></button>
-                            아이디 :  등록날짜 : {this.date}
-                        </div>
-                    </div>) : (<div></div>)}
+                    <div>
+                        <Comment id={this.state.product.id}/>
+                    </div>
 
                 </div>
             )

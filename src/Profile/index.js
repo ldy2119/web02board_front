@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {inject, observer} from "mobx-react";
 import {Link} from "react-router-dom";
 import Register from "./Register";
+import Advertise from "../Advertise/index"
 
 @inject("stores")
 @observer
@@ -15,11 +16,11 @@ class Profile extends Component {
     u = this.props.stores.ProfileStore;
 
     async componentDidMount() {
-        this.setState({
-            account : "zzzz",
-            password : "zzzzzz"
-        });
-        await this.AutoLogin();
+        // this.setState({
+        //     account : "zzzz",
+        //     password : "zzzzzz"
+        // });
+        // await this.AutoLogin();
     }
 
     updateAccount = (event) => {
@@ -36,12 +37,12 @@ class Profile extends Component {
         });
     };
 
-    AutoLogin = async () => {
-        await this.u.Login({
-            account : "zzzz",
-            password : "zzzzzz"
-        });
-    }
+    // AutoLogin = async () => {
+    //     await this.u.Login({
+    //         account : "zzzz",
+    //         password : "zzzzzz"
+    //     });
+    // }
 
     Login = async () =>
     {
@@ -72,8 +73,11 @@ class Profile extends Component {
             return(
                 <div>
                     <div>
-                        {this.u.user.username}님 환영합니다.
-                        <button onClick={this.Logout}>로그아웃</button>
+                        <h1>
+                            메인 화면
+                        </h1>
+                        광고
+                        <Advertise/>
                     </div>
                 </div>
             );

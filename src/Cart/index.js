@@ -68,6 +68,11 @@ class Cart extends Component {
     // }
 
     updateCount = (id, e) => {
+        if(e.target.value <= 0)
+        {
+            window.alert("수량을 바르게 입력해주세요.");
+            return;
+        }
         this.setState({
             ...this.state,
             [id] : e.target.value
